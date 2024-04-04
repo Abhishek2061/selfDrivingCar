@@ -1,0 +1,13 @@
+body {
+  margin: none;
+  background: grey;
+  overflow: hidden;
+  /* overflow is important because we don't want a scroll bar */
+  text-align: center;
+}
+#networkCanvas {
+  background: rgb(0, 0, 0);
+}
+#carCanvas {
+  background: rgb(211, 204, 204);
+}
