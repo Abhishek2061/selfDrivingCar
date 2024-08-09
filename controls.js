@@ -1,4 +1,4 @@
-class Control {
+class Controls {
   constructor(type) {
     this.forward = false;
     this.left = false;
@@ -14,8 +14,7 @@ class Control {
         break;
     }
   }
-  // #addKeyboardListeners new method
-  // # refers the private network. Can't be modify utside this controls class.
+
   #addKeyboardListeners() {
     document.onkeydown = (event) => {
       switch (event.key) {
@@ -33,8 +32,6 @@ class Control {
           break;
       }
     };
-    // why using call back function
-    // because if function will be used than "this" will refer to function and not "this" object as above
     document.onkeyup = (event) => {
       switch (event.key) {
         case "ArrowLeft":
@@ -53,6 +50,12 @@ class Control {
     };
   }
 }
+// #addKeyboardListeners new method
+// # refers the private network. Can't be modify utside this controls class.
+
+// why using call back function
+// because if function will be used than "this" will refer to function and not "this" object as above
+
 //  if...else statement when you have multiple conditions to check and the conditions are based on different expressions.
 
 // On the other hand, you should use a switch statement when you have a single expression that you want to compare with multiple values.

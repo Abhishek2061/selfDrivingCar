@@ -1,10 +1,9 @@
 // Artificial sensors of car
-
 class Sensor {
   // this for sensing car
   constructor(car) {
     this.car = car;
-    this.rayCount = 15; // our sensors will cast ray
+    this.rayCount = 5; // our sensors will cast ray
     this.rayLength = 150; // the range of sensors beyond it don't work
     this.raySpread = Math.PI / 2; // angle between farther rays is 45degree
 
@@ -13,8 +12,9 @@ class Sensor {
     // detecting road borders
     this.readings = [];
   }
+
   update(roadBorders, traffic) {
-    this.#castRays(); // # is for private method
+    this.#castRays();
     this.readings = [];
     for (let i = 0; i < this.rays.length; i++) {
       this.readings.push(this.#getReading(this.rays[i], roadBorders, traffic));
@@ -52,17 +52,18 @@ class Sensor {
         }
       }
     }
+
     if (touches.length == 0) {
       return null;
     } else {
-      // i want all the offsets from all touches in one array
       const offsets = touches.map((e) => e.offset);
-      // map method goes to each element of the array and for each element it takes its offset
       const minOffset = Math.min(...offsets);
-      // min operator does't work with array
-      // ... operator is spreading the array in individual values
       return touches.find((e) => e.offset == minOffset);
     }
+    // i want all the offsets from all touches in one array
+    // map method goes to each element of the array and for each element it takes its offset
+    // min operator does't work with array
+    // ... operator is spreading the array in individual values
   }
 
   #castRays() {
@@ -74,6 +75,7 @@ class Sensor {
           -this.raySpread / 2,
           this.rayCount == 1 ? 0.5 : i / (this.rayCount - 1)
         ) + this.car.angle;
+
       const start = { x: this.car.x, y: this.car.y };
       const end = {
         x: this.car.x - Math.sin(rayAngle) * this.rayLength,
@@ -82,12 +84,14 @@ class Sensor {
       this.rays.push([start, end]);
     }
   }
+
   draw(ctx) {
     for (let i = 0; i < this.rayCount; i++) {
       let end = this.rays[i][1];
       if (this.readings[i]) {
         end = this.readings[i];
       }
+
       ctx.beginPath();
       ctx.lineWidth = 2;
       ctx.strokeStyle = "yellow";
