@@ -26,7 +26,7 @@ class Road {
   }
 
   // method to find the centre of a given lane
-  getLAneCenter(laneIndex) {
+  getLaneCenter(laneIndex) {
     const laneWidth = this.width / this.laneCount;
     return (
       this.left +
